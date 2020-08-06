@@ -1,7 +1,10 @@
 <template>
   <v-app>
+    <router-link to="/">Home</router-link>
+    <router-link :to="{ name: 'About' }">About</router-link>
     <v-main>
       <DoTask />
+      <router-view></router-view>
     </v-main>
   </v-app>
 </template>
