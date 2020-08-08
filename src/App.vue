@@ -1,23 +1,23 @@
 <template>
   <v-app>
-    <router-link to="/">Home</router-link>
-    <router-link :to="{ name: 'About' }">About</router-link>
+    <v-app-bar app color="indigo" dark>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <v-toolbar-title>TodoList</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-items>
+        <v-icon>mdi-logout</v-icon>
+      </v-toolbar-items>
+    </v-app-bar>
+
     <v-main>
-      <DoTask />
       <router-view></router-view>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import DoTask from "./components/DoTask.vue";
-
 export default {
   name: "App",
-
-  components: {
-    DoTask,
-  },
 
   data: () => ({
     //
