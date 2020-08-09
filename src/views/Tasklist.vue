@@ -1,8 +1,14 @@
 <template>
   <div>
-    <h1>Tasklist</h1>
+    <v-text-field
+      v-model="inputTaskTitle"
+      placeholder="受信箱に保存したいタスクを入力してEnterで保存してください"
+      @keyup.enter="submitTask"
+    ></v-text-field>
     <template>
       <DoTask ref="dotaskdialog"></DoTask>
+      <TaskDetailDialog ref="taskdetaildialog"></TaskDetailDialog>
+      <TaskDeleteDialog ref="taskdeletedialog"></TaskDeleteDialog>
       <v-simple-table>
         <template v-slot:default>
           <thead>
@@ -10,13 +16,19 @@
               <th class="text-left">タイトル</th>
               <th class="text-left">期日</th>
               <th class="text-left">作成日</th>
+              <th class="text-left">操作</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="item in tasks" :key="item.id" @click="openDoTaskDialog">
+            <tr v-for="item in $store.state.tasks" :key="item.id">
               <td>{{ item.title }}</td>
               <td>{{ convertDateToString( item.dateLimit ) }}</td>
               <td>{{ convertDateToString( item.createdAt ) }}</td>
+              <td>
+                <v-icon @click="openTaskDetailDialog(item)">mdi-pencil</v-icon>
+                <v-icon @click="openDoTaskDialog">mdi-play</v-icon>
+                <v-icon @click="openTaskDeleteDialog(item)">mdi-delete</v-icon>
+              </td>
             </tr>
           </tbody>
         </template>
@@ -26,43 +38,42 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import DoTask from "@/components/DoTask.vue";
-
+import TaskDetailDialog from "@/components/TaskDetailDialog.vue";
+import TaskDeleteDialog from "@/components/TaskDeleteDialog.vue";
 export default {
   components: {
     DoTask,
+    TaskDetailDialog,
+    TaskDeleteDialog,
   },
   created() {
-    const unixtime_today = new Date().getTime();
-    this.tasks = [
-      {
-        id: 1,
-        title: "スーパーに買い出しに行く",
-        dateLimit: unixtime_today,
-        countPomodoro: 0,
-        createdAt: unixtime_today,
-      },
-      {
-        id: 2,
-        title: "カレーを作る",
-        dateLimit: unixtime_today,
-        countPomodoro: 0,
-        createdAt: unixtime_today,
-      },
-    ];
+    this.fetchTasks();
   },
   data() {
     return {
-      tasks: [],
+      inputTaskTitle: "",
     };
   },
   methods: {
+    ...mapActions(["fetchTasks", "addTaskByName"]),
     convertDateToString(unixtime) {
       let dateTime = new Date(unixtime);
       return dateTime.toLocaleDateString();
     },
     openDoTaskDialog() {
       this.$refs.dotaskdialog.openDialog();
+    },
+    openTaskDetailDialog(task) {
+      this.$refs.taskdetaildialog.openDialog(task);
+    },
+    submitTask() {
+      this.addTaskByName(this.inputTaskTitle);
+      this.inputTaskTitle = "";
+    },
+    openTaskDeleteDialog(task) {
+      this.$refs.taskdeletedialog.openDialog(task);
     },
   },
 };
