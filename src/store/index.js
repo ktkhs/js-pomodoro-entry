@@ -6,6 +6,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     tasks: [],
+    loginUser: null,
+    globalErrorMessage: "",
   },
   mutations: {
     addTask(state, task) {
@@ -18,6 +20,9 @@ export default new Vuex.Store({
     deleteTask(state, id) {
       const index = state.tasks.findIndex((t) => t.id === id);
       state.tasks.splice(index, 1); // splice-> 指定したindexから要素を一つ取り除く
+    },
+    onAuthUserChanged(state, user) {
+      state.loginUser = user;
     },
   },
   actions: {
