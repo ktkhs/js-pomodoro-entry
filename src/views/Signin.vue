@@ -1,5 +1,15 @@
 <template>
   <v-container text-center justify-center>
+    <v-row v-show="$store.state.errorMessage">
+      <v-col md="8" offset-md="2">
+        <v-alert type="error">{{ $store.state.errorMessage }}</v-alert>
+      </v-col>
+    </v-row>
+    <v-row v-show="$store.state.successMessage">
+      <v-col md="8" offset-md="2">
+        <v-alert type="success">{{ $store.state.successMessage }}</v-alert>
+      </v-col>
+    </v-row>
     <v-row>
       <v-col md="8" offset-md="2">
         <h2>Sign In</h2>
@@ -34,6 +44,7 @@
 </template>
 
 <script>
+import Firebase from "@/firebase";
 export default {
   name: "Signin",
   data() {
@@ -46,6 +57,7 @@ export default {
   methods: {
     loginUser() {
       console.log("Signin: login");
+      Firebase.signInWithEmailAndPassword(this.username, this.password);
     },
   },
 };
