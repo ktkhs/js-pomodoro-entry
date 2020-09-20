@@ -5,7 +5,7 @@
       <v-toolbar-title>TodoList</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
-        <v-icon>mdi-logout</v-icon>
+        <v-icon @click="logout">mdi-logout</v-icon>
       </v-toolbar-items>
     </v-app-bar>
 
@@ -16,11 +16,17 @@
 </template>
 
 <script>
+import Firebase from "@/firebase";
 export default {
   name: "App",
 
   data: () => ({
     //
   }),
+  methods: {
+    logout() {
+      Firebase.logOut();
+    },
+  },
 };
 </script>

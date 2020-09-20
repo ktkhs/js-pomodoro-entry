@@ -3,6 +3,8 @@ import VueRouter from "vue-router";
 import Signin from "../views/Signin.vue";
 import Signup from "../views/Signup.vue";
 import Tasklist from "../views/Tasklist.vue";
+import Firebase from "@/firebase";
+import store from "@/store";
 
 Vue.use(VueRouter);
 
@@ -21,6 +23,15 @@ const routes = [
     path: "/tasks",
     name: "Tasklist",
     component: Tasklist,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/",
+    redirect: "/tasks",
+  },
+  {
+    path: "*",
+    redirect: "/signin",
   },
 ];
 
@@ -28,6 +39,19 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+});
+
+router.beforeResolve((to, from, next) => {
+  Firebase.onAuth();
+  let currentUserStatus = store.getters["isSignedIn"];
+  let requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+  if (!requiresAuth) {
+    next();
+  } else if (requiresAuth && !currentUserStatus) {
+    next("/signin");
+  } else if (requiresAuth && currentUserStatus) {
+    next();
+  }
 });
 
 export default router;

@@ -1,11 +1,15 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import firebase from "firebase";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
     tasks: [],
+    loginUser: null,
+    errorMessage: "",
+    successMessage: "",
   },
   mutations: {
     addTask(state, task) {
@@ -19,39 +23,53 @@ export default new Vuex.Store({
       const index = state.tasks.findIndex((t) => t.id === id);
       state.tasks.splice(index, 1); // splice-> 指定したindexから要素を一つ取り除く
     },
+    onAuthUserChanged(state, user) {
+      state.loginUser = user;
+    },
+    setErrorMessage(state, message) {
+      state.errorMessage = message;
+    },
+    setSuccessMessage(state, message) {
+      state.successMessage = message;
+    },
   },
   actions: {
-    fetchTasks({ commit }) {
-      const unixtime_today = new Date().getTime();
-      let tasks = [
-        {
-          id: 1,
-          title: "スーパーに買い出しに行く",
-          dateLimit: unixtime_today,
-          countPomodoro: 0,
-          createdAt: unixtime_today,
-        },
-        {
-          id: 2,
-          title: "カレーを作る",
-          dateLimit: unixtime_today,
-          countPomodoro: 0,
-          createdAt: unixtime_today,
-        },
-      ];
-      tasks.forEach((task) => {
-        commit("addTask", task);
-      });
+    fetchTasks({ getters, commit }) {
+      if (getters.uid) {
+        firebase
+          .firestore()
+          .collection(`users/${getters.uid}/tasks`)
+          .get()
+          .then((snapshot) => {
+            snapshot.forEach((doc) => {
+              let task = doc.data();
+              task.id = doc.id;
+              commit("addTask", task);
+            });
+          });
+      }
     },
-    addTaskByName({ commit }, task_name) {
+    addTaskByName({ getters, commit }, task_name) {
       let task = {};
       task.title = task_name;
-      task.id = this.state.tasks.length + 1;
       task.countPomodoro = 0;
       task.dateLimit = new Date().getTime();
       task.createdAt = new Date().getTime();
-      commit("addTask", task);
+      if (getters.uid) {
+        firebase
+          .firestore()
+          .collection(`users/${getters.uid}/tasks`)
+          .add(task)
+          .then((doc) => {
+            task.id = doc.id;
+            commit("addTask", task);
+          });
+      }
     },
   },
   modules: {},
+  getters: {
+    isSignedIn: (state) => (state.loginUser ? true : false),
+    uid: (state) => (state.loginUser ? state.loginUser.uid : null),
+  },
 });
