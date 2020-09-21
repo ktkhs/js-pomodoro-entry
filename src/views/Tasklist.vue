@@ -22,8 +22,8 @@
           <tbody>
             <tr v-for="item in $store.state.tasks" :key="item.id">
               <td>{{ item.title }}</td>
-              <td>{{ convertDateToString( item.dateLimit ) }}</td>
-              <td>{{ convertDateToString( item.createdAt ) }}</td>
+              <td>{{ convertDateToString(item.dateLimit) }}</td>
+              <td>{{ convertDateToString(item.createdAt) }}</td>
               <td>
                 <v-icon @click="openTaskDetailDialog(item)">mdi-pencil</v-icon>
                 <v-icon @click="openDoTaskDialog">mdi-play</v-icon>
