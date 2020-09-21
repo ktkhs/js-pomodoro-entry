@@ -17,7 +17,7 @@ export default new Vuex.Store({
     },
     updateTask(state, { id, task }) {
       const index = state.tasks.findIndex((t) => t.id === id);
-      state.tasks[index] = task;
+      Vue.set(state.tasks, index, task);
     },
     deleteTask(state, id) {
       const index = state.tasks.findIndex((t) => t.id === id);
@@ -63,6 +63,30 @@ export default new Vuex.Store({
           .then((doc) => {
             task.id = doc.id;
             commit("addTask", task);
+          });
+      }
+    },
+    updateTask({ getters, commit }, { id, task }) {
+      if (getters.uid) {
+        firebase
+          .firestore()
+          .collection(`users/${getters.uid}/tasks`)
+          .doc(id)
+          .update(task)
+          .then(() => {
+            commit("updateTask", { id, task });
+          });
+      }
+    },
+    deleteTask({ getters, commit }, id) {
+      if (getters.uid) {
+        firebase
+          .firestore()
+          .collection(`users/${getters.uid}/tasks/`)
+          .doc(id)
+          .delete()
+          .then(() => {
+            commit("deleteTask", id);
           });
       }
     },
