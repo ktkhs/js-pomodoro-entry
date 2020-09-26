@@ -32,10 +32,8 @@ export default {
   },
 
   signUpWithEmailAndPassword(email, password) {
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then((res) => {
+    firebase.auth().createUserWithEmailAndPassword(email, password).then(
+      function(res){
         store.commit("setSuccessMessage", `User created!! ${res.user.email}`);
         router.push("/signin");
       })
