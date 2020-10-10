@@ -1,9 +1,9 @@
 <template>
   <div>
-    <v-row>
+    <v-row justify="center">
       <v-col cols="10" offset-md="1">
         <v-form ref="form">
-          <v-text-field label="First name"></v-text-field>
+          <v-text-field label="search"></v-text-field>
         </v-form>
       </v-col>
     </v-row>
