@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import firebase from "firebase";
+//import firebase from "firebase";
 
 Vue.use(Vuex);
 
@@ -112,66 +112,18 @@ export default new Vuex.Store({
           photo: require("@/assets/Rose.jpg"),
           description: "あなたのtweetは毒を巻き散らかしてる",
         },
+        {
+          id: "11",
+          name: "桜",
+          twitter: "bem",
+          twitterCount: "10241",
+          photo: require("@/assets/CherryBlossoms.jpg"),
+          description: "あなたのtweetは毒を巻き散らかしてる",
+        },
       ];
       photos.forEach((photo) => {
         commit("addPhoto", photo);
       });
-    },
-    fetchTasks({ getters, commit }) {
-      if (getters.uid) {
-        firebase
-          .firestore()
-          .collection(`users/${getters.uid}/tasks`)
-          .get()
-          .then((snapshot) => {
-            snapshot.forEach((doc) => {
-              let task = doc.data();
-              task.id = doc.id;
-              commit("addTask", task);
-            });
-          });
-      }
-    },
-    addTaskByName({ getters, commit }, task_name) {
-      let task = {};
-      task.title = task_name;
-      task.countPomodoro = 0;
-      task.dateLimit = new Date().getTime();
-      task.createdAt = new Date().getTime();
-      if (getters.uid) {
-        firebase
-          .firestore()
-          .collection(`users/${getters.uid}/tasks`)
-          .add(task)
-          .then((doc) => {
-            task.id = doc.id;
-            commit("addTask", task);
-          });
-      }
-    },
-    updateTask({ getters, commit }, { id, task }) {
-      if (getters.uid) {
-        firebase
-          .firestore()
-          .collection(`users/${getters.uid}/tasks`)
-          .doc(id)
-          .update(task)
-          .then(() => {
-            commit("updateTask", { id, task });
-          });
-      }
-    },
-    deleteTask({ getters, commit }, id) {
-      if (getters.uid) {
-        firebase
-          .firestore()
-          .collection(`users/${getters.uid}/tasks/`)
-          .doc(id)
-          .delete()
-          .then(() => {
-            commit("deleteTask", id);
-          });
-      }
     },
   },
   modules: {},

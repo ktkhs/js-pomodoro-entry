@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!--
     <v-row justify="center">
       <v-col cols="10" offset-md="1">
         <v-form ref="form">
@@ -7,6 +8,7 @@
         </v-form>
       </v-col>
     </v-row>
+    -->
     <v-row>
       <v-col>
         <v-card>

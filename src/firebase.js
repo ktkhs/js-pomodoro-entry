@@ -16,21 +16,6 @@ export default {
   init() {
     firebase.initializeApp(firebaseConfig);
   },
-  signInWithEmailAndPassword(email, password) {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(
-        (res) => {
-          store.commit("onAuthUserChanged", res.user);
-          router.push("/");
-        },
-        (err) => {
-          store.commit("setErrorMessage", err.message);
-        }
-      );
-  },
-
   // see: https://qiita.com/nekoGorilla/items/52c8d1f780930d04b13e
   signInWithTwitter() {
     let provider = new firebase.auth.TwitterAuthProvider();
@@ -39,18 +24,18 @@ export default {
       .signInWithPopup(provider)
       .then(
         (result) => {
-          var token = result.credential.token;
-          var secret = result.credential.secret;
-          console.log(token);
-          console.log(secret);
           var user = result.user;
           if (user) {
             const currentUser = {
               displayName: user.displayName,
               photoURL: user.photoURL,
+              uid: user.uid,
+              accessToken: result.credential.token,
+              secretToken: result.credential.secret,
             };
+            console.log(user);
             console.log(currentUser);
-            store.commit("onAuthUserChanged", user);
+            store.commit("onAuthUserChanged", currentUser);
             router.push("/");
           } else {
             store.commit("setErrorMessage", "invalied twitter account");
@@ -60,31 +45,6 @@ export default {
           store.commit("setErrorMessage", err.message);
         }
       );
-  },
-  signUpWithEmailAndPassword(email, password) {
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(function(res) {
-        store.commit("setSuccessMessage", `User created!! ${res.user.email}`);
-        router.push("/signin");
-      })
-      .catch((err) => {
-        store.commit("setErrorMessage", err.message);
-      });
-  },
-
-  logOut() {
-    firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        store.commit("onAuthUserChanged", null);
-        router.push("/signin");
-      })
-      .catch((err) => {
-        store.commit("setErrorMessage", `fail logout (${err}) `);
-      });
   },
 
   onAuth() {

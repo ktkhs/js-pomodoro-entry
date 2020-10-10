@@ -3,16 +3,14 @@
     <v-main>
       <router-view></router-view>
     </v-main>
-    <v-bottom-navigation background-color="black" dark shift fixed>
-      <v-btn to="photo-garally">
-        <span>Search</span>
-
+    <v-bottom-navigation dark fixed>
+      <v-btn to="/photo-garally" v-if="this.$store.getters.isSignedIn">
+        <span>garally</span>
         <v-icon>mdi-image-search</v-icon>
       </v-btn>
 
-      <v-btn>
-        <span>Profile</span>
-
+      <v-btn @click="moveProfile" v-if="this.$store.getters.isSignedIn">
+        <span>MyProfile</span>
         <v-icon>mdi-account-circle</v-icon>
       </v-btn>
     </v-bottom-navigation>
@@ -30,6 +28,9 @@ export default {
   methods: {
     logout() {
       Firebase.logOut();
+    },
+    moveProfile() {
+      this.$router.push({ name: "PhotoDetail", params: { userId: "bem" } });
     },
   },
 };

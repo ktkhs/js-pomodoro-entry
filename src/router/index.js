@@ -4,8 +4,8 @@ import Signin from "../views/Signin.vue";
 import Twitter from "../views/Twitter.vue";
 import PhotoGarally from "../views/PhotoGarally.vue";
 import PhotoDetail from "../views/PhotoDetail.vue";
-//import Firebase from "@/firebase";
-//import store from "@/store";
+import Firebase from "@/firebase";
+import store from "@/store";
 
 Vue.use(VueRouter);
 
@@ -19,11 +19,13 @@ const routes = [
     path: "/photo-garally",
     name: "PhotoGarally",
     component: PhotoGarally,
+    //  meta: { requiresAuth: true },
   },
   {
     path: "/photo-detail/:userId",
     name: "PhotoDetail",
     component: PhotoDetail,
+    //   meta: { requiresAuth: true },
   },
   {
     path: "/twitter-posts",
@@ -42,17 +44,17 @@ const router = new VueRouter({
   routes,
 });
 
-//router.beforeResolve((to, from, next) => {
-//  Firebase.onAuth();
-//  let currentUserStatus = store.getters["isSignedIn"];
-//  let requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
-//  if (!requiresAuth) {
-//    next();
-//  } else if (requiresAuth && !currentUserStatus) {
-//    next("/signin");
-//  } else if (requiresAuth && currentUserStatus) {
-//    next();
-//  }
-//});
+router.beforeResolve((to, from, next) => {
+  Firebase.onAuth();
+  let currentUserStatus = store.getters["isSignedIn"];
+  let requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+  if (!requiresAuth) {
+    next();
+  } else if (requiresAuth && !currentUserStatus) {
+    next("/signin");
+  } else if (requiresAuth && currentUserStatus) {
+    next();
+  }
+});
 
 export default router;
