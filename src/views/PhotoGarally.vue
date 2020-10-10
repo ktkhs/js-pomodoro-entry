@@ -54,8 +54,8 @@
 
       <v-col v-for="n in 9" :key="n" class="d-flex child-flex" cols="4">
         <v-img
-          :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
-          :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
+          :src="`../assets${n * 5 + 10}`"
+          :lazy-src="`../assets${n * 5 + 10}`"
           aspect-ratio="1"
           class="grey lighten-2"
         >
@@ -88,8 +88,51 @@ export default {
       },
       {
         id: "2",
+        name: "桜",
+        photo: "../assets/CherryBlossoms.jpg",
+        description: "あなたのtweetは毒を巻き散らかしてる",
+      },
+            {
+        id: "3",
+        name: "クローバー",
+        photo: "../assets/Clover.jpg",
+        description: "あなたのtweetは毒を巻き散らかしてる",
+      },
+            {
+        id: "4",
+        name: "彼岸花",
+        photo: "../assets/ClusterAmaryllis.jpg",
+        description: "あなたのtweetは毒を巻き散らかしてる",
+      },
+            {
+        id: "5",
+        name: "コスモス",
+        photo: "../assets/Cosmos.jpg",
+        description: "あなたのtweetは毒を巻き散らかしてる",
+
+      },
+            {
+        id: "6",
+        name: "アジサイ",
+        photo: "../assets/Hydrangea.jpg",
+        description: "あなたのtweetは毒を巻き散らかしてる",
+      },
+            {
+        id: "7",
+        name: "ユリ",
+        photo: "../assets/Lily.jpg",
+        description: "あなたのtweetは毒を巻き散らかしてる",
+      },
+            {
+        id: "8",
+        name: "鈴蘭",
+        photo: "../assets/LilyOfTheValley.jpg",
+        description: "あなたのtweetは毒を巻き散らかしてる",
+      },
+            {
+        id: "9",
         name: "花",
-        photo: "./path.jpg",
+        photo: "../assets/PhalaenopsisOrchid.jpg",
         description: "あなたのtweetは毒を巻き散らかしてる",
       },
     ];
