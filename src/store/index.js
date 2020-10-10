@@ -9,6 +9,7 @@ export default new Vuex.Store({
     tasks: [],
     photos: [],
     loginUser: null,
+    myTweets: null,
     errorMessage: "",
     successMessage: "",
   },
@@ -16,16 +17,8 @@ export default new Vuex.Store({
     addPhoto(state, photo) {
       state.photos.push(photo);
     },
-    addTask(state, task) {
-      state.tasks.push(task);
-    },
-    updateTask(state, { id, task }) {
-      const index = state.tasks.findIndex((t) => t.id === id);
-      Vue.set(state.tasks, index, task);
-    },
-    deleteTask(state, id) {
-      const index = state.tasks.findIndex((t) => t.id === id);
-      state.tasks.splice(index, 1); // splice-> 指定したindexから要素を一つ取り除く
+    setMyTweets(state, tweets) {
+      state.myTweets = tweets;
     },
     onAuthUserChanged(state, user) {
       state.loginUser = user;
@@ -124,6 +117,28 @@ export default new Vuex.Store({
       photos.forEach((photo) => {
         commit("addPhoto", photo);
       });
+    },
+
+    getMyPosts({ commit }) {
+      const axios = require("axios");
+      axios
+        .get("https://us-central1-kotobana-twitter.cloudfunctions.net/timeline")
+        .then((response) => {
+          // console.log("status:", response.status); // 200
+          // console.log("body:", response.data); // response body.
+          commit("setMyTweets", response.data);
+          //this.linkedText = response.data.reduce(
+          //  (accumulator, currentValue) => {
+          //    // console.log("currentValue",currentValue);
+          //    return accumulator + currentValue.text;
+          //  },
+          //  ""
+          //);
+          //console.log("text:", this.linkedText);
+        })
+        .catch((err) => {
+          commit("setErrorMessage", err);
+        });
     },
   },
   modules: {},

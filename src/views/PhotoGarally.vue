@@ -41,7 +41,7 @@
       <v-col
         v-for="item in this.$store.state.photos"
         :key="item.id"
-        class="d-flex child-flex pa-0"
+        class="d-flex child-flex pa-1"
         cols="4"
       >
         <router-link
