@@ -31,9 +31,41 @@ export default {
       );
   },
 
+  // see: https://qiita.com/nekoGorilla/items/52c8d1f780930d04b13e
+  signInWithTwitter() {
+    let provider = new firebase.auth.TwitterAuthProvider();
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then(
+        (result) => {
+          var token = result.credential.token;
+          var secret = result.credential.secret;
+          console.log(token);
+          console.log(secret);
+          var user = result.user;
+          if (user) {
+            const currentUser = {
+              displayName: user.displayName,
+              photoURL: user.photoURL,
+            };
+            console.log(currentUser);
+            store.commit("onAuthUserChanged", user);
+            router.push("/");
+          } else {
+            store.commit("setErrorMessage", "invalied twitter account");
+          }
+        },
+        (err) => {
+          store.commit("setErrorMessage", err.message);
+        }
+      );
+  },
   signUpWithEmailAndPassword(email, password) {
-    firebase.auth().createUserWithEmailAndPassword(email, password).then(
-      function(res){
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(function(res) {
         store.commit("setSuccessMessage", `User created!! ${res.user.email}`);
         router.push("/signin");
       })
