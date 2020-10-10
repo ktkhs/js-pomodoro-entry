@@ -5,26 +5,25 @@
     </v-main>
     <v-bottom-navigation background-color="black" dark shift>
       <v-btn>
-        <span>Video</span>
-        <v-icon>mdi-television-play</v-icon>
+        <span>Home</span>
+        <v-icon>mdi-home</v-icon>
       </v-btn>
 
       <v-btn>
-        <span>Music</span>
+        <span>Search</span>
 
-        <v-icon>mdi-music-note</v-icon>
+        <v-icon>mdi-image-search</v-icon>
+      </v-btn>
+      <v-btn>
+        <span>Favorite</span>
+
+        <v-icon>mdi-heart</v-icon>
       </v-btn>
 
       <v-btn>
-        <span>Book</span>
+        <span>Profile</span>
 
-        <v-icon>mdi-book</v-icon>
-      </v-btn>
-
-      <v-btn>
-        <span>Image</span>
-
-        <v-icon>mdi-image</v-icon>
+        <v-icon>mdi-account-circle</v-icon>
       </v-btn>
     </v-bottom-navigation>
   </v-app>
