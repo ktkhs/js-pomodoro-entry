@@ -4,6 +4,8 @@ import Signin from "../views/Signin.vue";
 import Signup from "../views/Signup.vue";
 import Tasklist from "../views/Tasklist.vue";
 import Twitter from "../views/Twitter.vue";
+import PhotoGarally from "../views/PhotoGarally.vue";
+import PhotoDetail from "../views/PhotoDetail.vue";
 //import Firebase from "@/firebase";
 //import store from "@/store";
 
@@ -25,6 +27,16 @@ const routes = [
     name: "Tasklist",
     component: Tasklist,
     meta: { requiresAuth: true },
+  },
+  {
+    path: "/photo-garally",
+    name: "PhotoGarally",
+    component: PhotoGarally,
+  },
+  {
+    path: "/photo-detail",
+    name: "PhotoDetail",
+    component: PhotoDetail,
   },
   {
     path: "/twitter-posts",
