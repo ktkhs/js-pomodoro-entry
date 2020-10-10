@@ -13,7 +13,7 @@
           <v-img
             src="../assets/MiniatureRose.png"
             class="white--text align-end"
-            gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+            max-height="300"
           >
           </v-img>
 
@@ -36,106 +36,43 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-img
-        src="https://bad.src/not/valid"
-        lazy-src="https://picsum.photos/id/11/100/60"
-        max-width="500"
-        max-height="300"
+      <v-col
+        v-for="item in this.$store.state.photos"
+        :key="item.id"
+        class="d-flex child-flex pa-0"
+        cols="4"
       >
-        <template v-slot:placeholder>
-          <v-row class="fill-height ma-0" align="center" justify="center">
-            <v-progress-circular
-              indeterminate
-              color="grey lighten-5"
-            ></v-progress-circular>
-          </v-row>
-        </template>
-      </v-img>
-
-      <v-col v-for="n in 9" :key="n" class="d-flex child-flex" cols="4">
-        <v-img
-          :src="`../assets${n * 5 + 10}`"
-          :lazy-src="`../assets${n * 5 + 10}`"
-          aspect-ratio="1"
-          class="grey lighten-2"
+        <router-link
+          :to="{ name: 'PhotoDetail', params: { userId: item.twitter } }"
         >
-          <template v-slot:placeholder>
-            <v-row class="fill-height ma-0" align="center" justify="center">
-              <v-progress-circular
-                indeterminate
-                color="grey lighten-5"
-              ></v-progress-circular>
-            </v-row>
-          </template>
-        </v-img>
+          <v-img
+            v-bind:src="item.photo"
+            :lazy-src="item.photo"
+            aspect-ratio="1"
+          >
+            <div class="mt-2 pl-2 text-h6 font-weight-bold">
+              @{{ item.twitter }}
+            </div>
+            <div class="flower">
+              <v-btn icon>
+                <v-icon>mdi-heart</v-icon>
+              </v-btn>
+              {{ item.twitterCount }}
+            </div>
+          </v-img>
+        </router-link>
       </v-col>
     </v-row>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "PhotoGarally",
-  created() {
-    console.log("created");
-    // read local csv
-    this.flowers = [
-      {
-        id: "1",
-        name: "貧者の薔薇",
-        photo: "./path.jpg",
-        description: "あなたのtweetは毒を巻き散らかしてる",
-      },
-      {
-        id: "2",
-        name: "桜",
-        photo: "../assets/CherryBlossoms.jpg",
-        description: "あなたのtweetは毒を巻き散らかしてる",
-      },
-            {
-        id: "3",
-        name: "クローバー",
-        photo: "../assets/Clover.jpg",
-        description: "あなたのtweetは毒を巻き散らかしてる",
-      },
-            {
-        id: "4",
-        name: "彼岸花",
-        photo: "../assets/ClusterAmaryllis.jpg",
-        description: "あなたのtweetは毒を巻き散らかしてる",
-      },
-            {
-        id: "5",
-        name: "コスモス",
-        photo: "../assets/Cosmos.jpg",
-        description: "あなたのtweetは毒を巻き散らかしてる",
 
-      },
-            {
-        id: "6",
-        name: "アジサイ",
-        photo: "../assets/Hydrangea.jpg",
-        description: "あなたのtweetは毒を巻き散らかしてる",
-      },
-            {
-        id: "7",
-        name: "ユリ",
-        photo: "../assets/Lily.jpg",
-        description: "あなたのtweetは毒を巻き散らかしてる",
-      },
-            {
-        id: "8",
-        name: "鈴蘭",
-        photo: "../assets/LilyOfTheValley.jpg",
-        description: "あなたのtweetは毒を巻き散らかしてる",
-      },
-            {
-        id: "9",
-        name: "花",
-        photo: "../assets/PhalaenopsisOrchid.jpg",
-        description: "あなたのtweetは毒を巻き散らかしてる",
-      },
-    ];
+  created() {
+    this.createData();
   },
   data() {
     return {
@@ -143,9 +80,22 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["createData"]),
     getTwitterPosts() {
       console.log("plase write javascript logic here");
     },
   },
 };
 </script>
+
+<style scoped>
+.flower {
+  color: #ffffff;
+  margin: 0;
+  position: absolute;
+  padding-right: 5px;
+  bottom: 0;
+  width: 100%;
+  text-align: right;
+}
+</style>

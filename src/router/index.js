@@ -21,7 +21,7 @@ const routes = [
     component: PhotoGarally,
   },
   {
-    path: "/photo-detail",
+    path: "/photo-detail/:userId",
     name: "PhotoDetail",
     component: PhotoDetail,
   },
@@ -33,10 +33,6 @@ const routes = [
   {
     path: "/",
     redirect: "/photo-garally",
-  },
-  {
-    path: "*",
-    redirect: "/signin",
   },
 ];
 

@@ -7,11 +7,15 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     tasks: [],
+    photos: [],
     loginUser: null,
     errorMessage: "",
     successMessage: "",
   },
   mutations: {
+    addPhoto(state, photo) {
+      state.photos.push(photo);
+    },
     addTask(state, task) {
       state.tasks.push(task);
     },
@@ -34,6 +38,85 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    createData({ commit }) {
+      let photos = [
+        {
+          id: "2",
+          name: "桜",
+          twitter: "bem523",
+          twitterCount: "10241",
+          photo: require("@/assets/CherryBlossoms.jpg"),
+          description: "あなたのtweetは毒を巻き散らかしてる",
+        },
+        {
+          id: "3",
+          name: "クローバー",
+          twitter: "ihechoi3",
+          twitterCount: "102",
+          photo: require("@/assets/Clover.jpg"),
+          description: "あなたのtweetは毒を巻き散らかしてる",
+        },
+        {
+          id: "4",
+          name: "彼岸花",
+          twitter: "chokudai",
+          twitterCount: "1022",
+          photo: require("@/assets/ClusterAmaryllis.jpg"),
+          description: "あなたのtweetは毒を巻き散らかしてる",
+        },
+        {
+          id: "5",
+          name: "コスモス",
+          twitter: "yagi2432",
+          twitterCount: "322",
+          photo: require("@/assets/Cosmos.jpg"),
+          description: "あなたのtweetは毒を巻き散らかしてる",
+        },
+        {
+          id: "6",
+          name: "アジサイ",
+          twitter: "kamohai",
+          twitterCount: "42",
+          photo: require("@/assets/Hydrangea.jpg"),
+          description: "あなたのtweetは毒を巻き散らかしてる",
+        },
+        {
+          id: "7",
+          name: "ユリ",
+          twitter: "lyly",
+          twitterCount: "42",
+          photo: require("@/assets/Lily.jpg"),
+          description: "あなたのtweetは毒を巻き散らかしてる",
+        },
+        {
+          id: "8",
+          name: "鈴蘭",
+          twitter: "ran3243",
+          twitterCount: "4220",
+          photo: require("@/assets/LilyOfTheValley.jpg"),
+          description: "あなたのtweetは毒を巻き散らかしてる",
+        },
+        {
+          id: "9",
+          name: "花",
+          twitter: "sae54",
+          twitterCount: "40",
+          photo: require("@/assets/PhalaenopsisOrchid.jpg"),
+          description: "あなたのtweetは毒を巻き散らかしてる",
+        },
+        {
+          id: "10",
+          name: "薔薇",
+          twitter: "saex354",
+          twitterCount: "240",
+          photo: require("@/assets/Rose.jpg"),
+          description: "あなたのtweetは毒を巻き散らかしてる",
+        },
+      ];
+      photos.forEach((photo) => {
+        commit("addPhoto", photo);
+      });
+    },
     fetchTasks({ getters, commit }) {
       if (getters.uid) {
         firebase
@@ -95,5 +178,10 @@ export default new Vuex.Store({
   getters: {
     isSignedIn: (state) => (state.loginUser ? true : false),
     uid: (state) => (state.loginUser ? state.loginUser.uid : null),
+    photoByTwitter: (state) => (id) => {
+      return state.photos.find((v) => {
+        return v.twitter === id;
+      });
+    },
   },
 });
