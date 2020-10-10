@@ -3,8 +3,9 @@ import VueRouter from "vue-router";
 import Signin from "../views/Signin.vue";
 import Signup from "../views/Signup.vue";
 import Tasklist from "../views/Tasklist.vue";
-import Firebase from "@/firebase";
-import store from "@/store";
+import Twitter from "../views/Twitter.vue";
+//import Firebase from "@/firebase";
+//import store from "@/store";
 
 Vue.use(VueRouter);
 
@@ -26,6 +27,11 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
+    path: "/twitter-posts",
+    name: "Twitter",
+    component: Twitter,
+  },
+  {
     path: "/",
     redirect: "/tasks",
   },
@@ -41,17 +47,17 @@ const router = new VueRouter({
   routes,
 });
 
-router.beforeResolve((to, from, next) => {
-  Firebase.onAuth();
-  let currentUserStatus = store.getters["isSignedIn"];
-  let requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
-  if (!requiresAuth) {
-    next();
-  } else if (requiresAuth && !currentUserStatus) {
-    next("/signin");
-  } else if (requiresAuth && currentUserStatus) {
-    next();
-  }
-});
+//router.beforeResolve((to, from, next) => {
+//  Firebase.onAuth();
+//  let currentUserStatus = store.getters["isSignedIn"];
+//  let requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+//  if (!requiresAuth) {
+//    next();
+//  } else if (requiresAuth && !currentUserStatus) {
+//    next("/signin");
+//  } else if (requiresAuth && currentUserStatus) {
+//    next();
+//  }
+//});
 
 export default router;
