@@ -3,21 +3,11 @@
     <v-main>
       <router-view></router-view>
     </v-main>
-    <v-bottom-navigation background-color="black" dark shift>
-      <v-btn>
-        <span>Home</span>
-        <v-icon>mdi-home</v-icon>
-      </v-btn>
-
-      <v-btn>
+    <v-bottom-navigation background-color="black" dark shift fixed>
+      <v-btn to="photo-garally">
         <span>Search</span>
 
         <v-icon>mdi-image-search</v-icon>
-      </v-btn>
-      <v-btn>
-        <span>Favorite</span>
-
-        <v-icon>mdi-heart</v-icon>
       </v-btn>
 
       <v-btn>
