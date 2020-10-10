@@ -76,8 +76,28 @@
 <script>
 export default {
   name: "PhotoGarally",
+  created() {
+    console.log("created");
+    // read local csv
+    this.flowers = [
+      {
+        id: "1",
+        name: "貧者の薔薇",
+        photo: "./path.jpg",
+        description: "あなたのtweetは毒を巻き散らかしてる",
+      },
+      {
+        id: "2",
+        name: "花",
+        photo: "./path.jpg",
+        description: "あなたのtweetは毒を巻き散らかしてる",
+      },
+    ];
+  },
   data() {
-    return {};
+    return {
+      flowers: [],
+    };
   },
   methods: {
     getTwitterPosts() {
