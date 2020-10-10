@@ -1,7 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Signin from "../views/Signin.vue";
-import Signup from "../views/Signup.vue";
 import Tasklist from "../views/Tasklist.vue";
 import Twitter from "../views/Twitter.vue";
 import PhotoGarally from "../views/PhotoGarally.vue";
@@ -16,11 +15,6 @@ const routes = [
     path: "/signin",
     name: "Signin",
     component: Signin,
-  },
-  {
-    path: "/signup",
-    name: "Signup",
-    component: Signup,
   },
   {
     path: "/tasks",
