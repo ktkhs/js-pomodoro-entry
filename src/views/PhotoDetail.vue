@@ -3,7 +3,7 @@
     <v-row>
       <v-col>
         <v-card>
-          <v-img :src="photo.flower.photo" class="white--text">
+          <v-img :src="photo.flower.photo" class="white--text" max-height="500">
             <div class="pt-4 pl-4 text-h4 font-weight-bold">
               @{{ photo.twitter }}
             </div>

@@ -38,9 +38,10 @@ export default new Vuex.Store({
           twitter: "bem523",
           twitterCount: "10241",
           flower: {
-          name: "桜",
-          photo: require("@/assets/CherryBlossoms.jpg"),
-          description: "あなたのtweetは毒を巻き散らかしてる",
+              name: "コチョウラン",
+              photo: require("@/assets/PhalaenopsisOrchid.jpg"),
+              description:
+            "コチョウランの花言葉は「幸福が飛んでくる」「純粋な愛」です。幸せいっぱいなあなたのTweetはコチョウランそのものです。",
           },
         },
         {
@@ -48,9 +49,10 @@ export default new Vuex.Store({
           twitter: "ihechoi3",
           twitterCount: "102",
           flower: {
-          name: "クローバー",
-          photo: require("@/assets/Clover.jpg"),
-          description: "あなたのtweetは毒を巻き散らかしてる",
+              name: "コスモス",
+              photo: require("@/assets/Cosmos.jpg"),
+              description:
+            "コスモスの花言葉は「乙女の真心」「調和」「謙虚」です。清潔感と繊細さを兼ね備えたあなたのTweetはコスモスそのものです。",
           }
         },
         {
@@ -58,9 +60,10 @@ export default new Vuex.Store({
           twitter: "chokudai",
           twitterCount: "1022",
           flower: {
-          name: "彼岸花",
-          photo: require("@/assets/ClusterAmaryllis.jpg"),
-          description: "あなたのtweetは毒を巻き散らかしてる",
+                name: "ヒガンバナ",
+                photo: require("@/assets/ClusterAmaryllis.jpg"),
+              description:
+            "ヒガンバナの花言葉は「悲しき思い出」「あきらめ」「独立」「情熱」です。あなたのTweetはヒガンバナの様に悲しみに満ちています。",
           }
         },
         {
@@ -68,9 +71,10 @@ export default new Vuex.Store({
           twitter: "yagi2432",
           twitterCount: "322",
           flower: {
-          name: "コスモス",
-          photo: require("@/assets/Cosmos.jpg"),
-          description: "あなたのtweetは毒を巻き散らかしてる",
+             name: "サクラ",
+          photo: require("@/assets/CherryBlossoms.jpg"),
+              description:
+            "サクラの花言葉は「精神の美」「優美な女性」です。あなたのTweetはしとやかなサクラの様に美しいです。",
           }
         },
         {
@@ -78,9 +82,10 @@ export default new Vuex.Store({
           twitter: "kamohai",
           twitterCount: "42",
           flower: {
-          name: "アジサイ",
-          photo: require("@/assets/Hydrangea.jpg"),
-          description: "あなたのtweetは毒を巻き散らかしてる",
+                    name: "スズラン",
+          photo: require("@/assets/LilyOfTheValley.jpg"),
+          description:
+            "スズランの花言葉は「再び幸せが訪れる」「純粋」「純潔」「謙遜」です。あなたのTweetは春の訪れを告げるスズランの様です。",
           }
         },
         {
@@ -88,9 +93,10 @@ export default new Vuex.Store({
           twitter: "lyly",
           twitterCount: "42",
           flower: {
-          name: "ユリ",
-          photo: require("@/assets/Lily.jpg"),
-          description: "あなたのtweetは毒を巻き散らかしてる",
+                      name: "貧者の薔薇",
+          photo: require("@/assets/MiniatureRose.png"),
+          description:
+            "ミニチュアローズの花言葉は「感謝するぜ」「お前と出会えた」「これまでの全てに!!!」です。あなたのTweetからは人間の底すらない悪意を感じます。",
           }
         },
         {
@@ -98,9 +104,10 @@ export default new Vuex.Store({
           twitter: "ran3243",
           twitterCount: "4220",
           flower: {
-          name: "鈴蘭",
-          photo: require("@/assets/LilyOfTheValley.jpg"),
-          description: "あなたのtweetは毒を巻き散らかしてる",
+            name: "ストロングゼロ",
+          photo: require("@/assets/StrongZero.jpg"),
+          description:
+            "ストロングゼロの酒言葉は「飲む福祉」「虚無の酒」です。支離滅裂なTweetを繰り返すあなたはおそらく酔っぱらっています。ストロングゼロに含まれるアルコール量はテキーラショット3.75杯分と同じらしいですよ。酔いすぎにはご注意を！",
           }
         },
         {
@@ -108,9 +115,10 @@ export default new Vuex.Store({
           twitter: "sae54",
           twitterCount: "40",
           flower: {
-          name: "花",
-          photo: require("@/assets/PhalaenopsisOrchid.jpg"),
-          description: "あなたのtweetは毒を巻き散らかしてる",
+                      name: "ユリ",
+          photo: require("@/assets/Lily.jpg"),
+          description:
+            "ユリの花言葉は「純粋」「無垢」「威厳」です。あなたのTweetは威厳に満ちていて堂々たるユリの様です。",
           }
         },
         {
@@ -118,19 +126,21 @@ export default new Vuex.Store({
           twitter: "saex354",
           twitterCount: "240",
           flower: {
-          name: "薔薇",
-          photo: require("@/assets/Rose.jpg"),
-          description: "あなたのtweetは毒を巻き散らかしてる",
+             name: "チューリップ",
+          photo: require("@/assets/Tulips.jpg"),
+          description:
+            "チューリップの花言葉は「思いやり」です。あなたのTweetは思いやりに満ちてチューリップの様ですね。「思いやり」の花言葉は、三人の騎士を思いやる美少女の言い伝えにちなむともいわれます。",
           }
         },
         {
           id: "11",
-          name: "桜",
           twitter: "bem",
           twitterCount: "10241",
           flower: {
-          photo: require("@/assets/CherryBlossoms.jpg"),
-          description: "あなたのtweetは毒を巻き散らかしてる",
+             name: "ヒガンバナ",
+          photo: require("@/assets/ClusterAmaryllis.jpg"),
+          description:
+            "ヒガンバナの花言葉は「悲しき思い出」「あきらめ」「独立」「情熱」です。あなたのTweetはヒガンバナの様に悲しみに満ちています。",
           }
         },
       ];
