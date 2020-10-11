@@ -3,7 +3,7 @@
     <v-row>
       <v-col>
         <v-card>
-          <v-img :src="photo.photo" class="white--text">
+          <v-img :src="photo.flower.photo" class="white--text">
             <div class="pt-4 pl-4 text-h4 font-weight-bold">
               @{{ photo.twitter }}
             </div>
@@ -29,10 +29,10 @@
     <v-row>
       <v-col offset="1" cols="10">
         <div class="text-h4 font-weight-bold pt-5">
-          {{ photo.name }}
+          {{ photo.flower.name }}
         </div>
         <div class="pt-5">
-          {{ photo.description }}
+          {{ photo.flower.description }}
         </div>
       </v-col>
     </v-row>
