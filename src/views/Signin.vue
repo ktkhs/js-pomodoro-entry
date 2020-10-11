@@ -1,16 +1,5 @@
 <template>
   <v-container text-center justify-center>
-    test
-    <v-row v-show="$store.state.errorMessage">
-      <v-col md="8" offset-md="2">
-        <v-alert type="error">{{ $store.state.errorMessage }}</v-alert>
-      </v-col>
-    </v-row>
-    <v-row v-show="$store.state.successMessage">
-      <v-col md="8" offset-md="2">
-        <v-alert type="success">{{ $store.state.successMessage }}</v-alert>
-      </v-col>
-    </v-row>
     <v-row>
       <v-col md="8" offset-md="2">
         <h2>Welcome To kotobara!!</h2>
