@@ -19,13 +19,13 @@ const routes = [
     path: "/photo-garally",
     name: "PhotoGarally",
     component: PhotoGarally,
-    meta: { requiresAuth: true },
+    //meta: { requiresAuth: true },
   },
   {
     path: "/photo-detail/:userId",
     name: "PhotoDetail",
     component: PhotoDetail,
-    meta: { requiresAuth: true },
+    //meta: { requiresAuth: true },
   },
   {
     path: "/twitter-posts",

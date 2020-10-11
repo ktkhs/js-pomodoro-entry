@@ -11,12 +11,18 @@
     -->
     <v-row>
       <v-col>
+        <router-link
+          :to="{ name: 'PhotoDetail', params: { userId: this.thumb.twitter } }"
+        >
         <v-card>
           <v-img
-            src="../assets/MiniatureRose.png"
-            class="white--text align-end"
+            :src="this.thumb.flower.photo"
+            class="white--text"
             max-height="300"
           >
+          <div class="mt-2 pl-2 text-h3 font-weight-bold">
+            {{this.thumb.twitter}}
+          </div>
           </v-img>
 
           <v-card-actions>
@@ -25,6 +31,7 @@
             <v-btn icon>
               <v-icon>mdi-heart</v-icon>
             </v-btn>
+              {{ this.thumb.twitterCount }}
 
             <v-btn icon>
               <v-icon>mdi-bookmark</v-icon>
@@ -35,6 +42,7 @@
             </v-btn>
           </v-card-actions>
         </v-card>
+        </router-link>
       </v-col>
     </v-row>
     <v-row>
@@ -48,8 +56,8 @@
           :to="{ name: 'PhotoDetail', params: { userId: item.twitter } }"
         >
           <v-img
-            v-bind:src="item.photo"
-            :lazy-src="item.photo"
+            v-bind:src="item.flower.photo"
+            :lazy-src="item.flower.photo"
             aspect-ratio="1"
           >
             <div class="mt-2 pl-2 text-h6 font-weight-bold">
@@ -75,10 +83,12 @@ export default {
 
   created() {
     this.createData();
+    let max_images = Math.floor( Math.random() * this.$store.state.photos.length );
+    this.thumb = this.$store.state.photos[max_images];
   },
   data() {
     return {
-      flowers: [],
+      thumb: null
     };
   },
   methods: {
