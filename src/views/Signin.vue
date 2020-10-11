@@ -1,5 +1,6 @@
 <template>
   <v-container text-center justify-center>
+    test
     <v-row v-show="$store.state.errorMessage">
       <v-col md="8" offset-md="2">
         <v-alert type="error">{{ $store.state.errorMessage }}</v-alert>

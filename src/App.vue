@@ -4,12 +4,12 @@
       <router-view></router-view>
     </v-main>
     <v-bottom-navigation dark fixed>
-      <v-btn to="/photo-garally" v-if="this.$store.getters.isSignedIn">
+      <v-btn to="/photo-garally">
         <span>garally</span>
         <v-icon>mdi-image-search</v-icon>
       </v-btn>
 
-      <v-btn @click="moveProfile" v-if="this.$store.getters.isSignedIn">
+      <v-btn @click="moveProfile">
         <span>MyProfile</span>
         <v-icon>mdi-account-circle</v-icon>
       </v-btn>
